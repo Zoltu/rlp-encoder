@@ -1,7 +1,7 @@
 {
 	"name": "@zoltu/rlp-encoder",
 	"description": "Dependency free library for doing RLP encoding.",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"repository": {},
 	"license": "Unlicense",
 	"main": "output-node/index.js",
