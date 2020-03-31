@@ -22,7 +22,7 @@
 		"build": "tsc --project tsconfig-es.json && tsc --project tsconfig-node.json",
 		"test": "ts-node --project tsconfig-tests.json source/index.tests.ts",
 		"clean": "recursive-delete \"./output-es\" && recursive-delete \"./output-node\"",
-		"prepublishOnly": "npm run build && npm run test"
+		"prepublishOnly": "npm run clean && npm run build && npm run test"
 	},
 	"files": [
 		"/output-es/",
