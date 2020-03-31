@@ -1,7 +1,7 @@
 {
 	"name": "@zoltu/rlp-encoder",
 	"description": "Dependency free library for doing RLP encoding.",
-	"version": "1.0.2",
+	"version": "1.1.0",
 	"repository": {
 		"url": "https://github.com/Zoltu/rlp-encoder"
 	},
@@ -14,12 +14,14 @@
 		"@zoltu/bigint-helpers": "1.0.0",
 		"chai": "4.2.0",
 		"chai-bytes": "0.1.2",
-		"ts-node": "8.1.0",
-		"typescript": "3.4.5"
+		"recursive-fs": "2.1.0",
+		"ts-node": "8.8.1",
+		"typescript": "3.8.3"
 	},
 	"scripts": {
 		"build": "tsc --project tsconfig-es.json && tsc --project tsconfig-node.json",
 		"test": "ts-node --project tsconfig-tests.json source/index.tests.ts",
+		"clean": "recursive-delete \"./output-es\" && recursive-delete \"./output-node\"",
 		"prepublishOnly": "npm run build && npm run test"
 	},
 	"files": [

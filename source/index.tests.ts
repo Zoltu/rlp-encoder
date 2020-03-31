@@ -2,7 +2,7 @@ import { expect, use as chaiUse} from 'chai'
 import chaiBytes from 'chai-bytes'
 chaiUse(chaiBytes)
 import { unsignedBigintToUint8Array } from '@zoltu/bigint-helpers'
-import { rlpEncode, RlpItem } from './index'
+import { rlpEncode, RlpItem, rlpDecode } from './index'
 
 // Adapted from https://github.com/ethereum/tests/blob/develop/RLPTests/rlptest.json, this encoder doesn't turn things into byte arrays for you, so the inputs have been pre-converted here
 const testCases: { [key: string]: { in: RlpItem, out: string} } = {
@@ -164,12 +164,20 @@ const testCases: { [key: string]: { in: RlpItem, out: string} } = {
 }
 
 for (let testCaseName in testCases) {
-	console.log(testCaseName)
+	console.log(`Encode: ${testCaseName}`)
 	const input = testCases[testCaseName].in
 	const output = testCases[testCaseName].out
 	const expected = hexStringToUint8Array(output)
 	const actual = rlpEncode(input)
 	expect(expected).to.equalBytes(actual)
+}
+for (let testCaseName in testCases) {
+	console.log(`Decode: ${testCaseName}`)
+	const input = hexStringToUint8Array(testCases[testCaseName].out)
+	const output = testCases[testCaseName].in
+	const expected = output
+	const actual = rlpDecode(input)
+	expect(expected).to.deep.equal(actual.decoded)
 }
 console.log('done')
 
