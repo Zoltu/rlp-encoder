@@ -177,7 +177,7 @@ for (let testCaseName in testCases) {
 	const output = testCases[testCaseName].in
 	const expected = output
 	const actual = rlpDecode(input)
-	expect(expected).to.deep.equal(actual.decoded)
+	expect(expected).to.deep.equal(actual)
 }
 console.log('done')
 

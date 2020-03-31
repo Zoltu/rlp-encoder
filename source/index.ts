@@ -80,7 +80,11 @@ function hexStringToUint8Array(hex: string): Uint8Array {
 	return bytes
 }
 
-export function rlpDecode(data: Uint8Array): { decoded: RlpItem, consumed: number } {
+export function rlpDecode(data: Uint8Array): RlpItem {
+	return rlpDecodeItem(data).decoded
+}
+
+function rlpDecodeItem(data: Uint8Array): { decoded: RlpItem, consumed: number } {
 	if (data.length === 0) throw new Error(`Cannot RLP decode a 0-length byte array.`)
 	if (data[0] <= 0x7f) {
 		const consumed = 1
@@ -109,7 +113,7 @@ export function rlpDecode(data: Uint8Array): { decoded: RlpItem, consumed: numbe
 		let offset = 1
 		const results = []
 		while (offset !== length + 1) {
-			const {decoded, consumed} = rlpDecode(data.slice(offset))
+			const {decoded, consumed} = rlpDecodeItem(data.slice(offset))
 			results.push(decoded)
 			offset += consumed
 			if (offset > length + 1) throw new Error(`Encoded array length (${length}) doesn't align with the sum of the lengths of the encoded elements (${offset})`)
@@ -123,7 +127,7 @@ export function rlpDecode(data: Uint8Array): { decoded: RlpItem, consumed: numbe
 		let offset = 1 + lengthBytesLength
 		const results = []
 		while (offset !== length + 1 + lengthBytesLength) {
-			const {decoded, consumed} = rlpDecode(data.slice(offset))
+			const {decoded, consumed} = rlpDecodeItem(data.slice(offset))
 			results.push(decoded)
 			offset += consumed
 			if (offset > length + 1 + lengthBytesLength) throw new Error(`Encoded array length (${length}) doesn't align with the sum of the lengths of the encoded elements (${offset})`)
