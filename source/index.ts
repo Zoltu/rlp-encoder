@@ -44,7 +44,7 @@ function rlpEncodeList(items: ReadonlyArray<RlpItem>): Uint8Array {
 
 function rlpEncodeTiny(data: Uint8Array): Uint8Array {
 	if (data.length > 1) throw new Error(`rlpEncodeTiny can only encode single byte values.`)
-	if (data[0] > 0x80) throw new Error(`rlpEncodeTiny can only encode values less than 0x80`)
+	if (data[0] >= 0x80) throw new Error(`rlpEncodeTiny can only encode values less than 0x80`)
 	return data
 }
 
