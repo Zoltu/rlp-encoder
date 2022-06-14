@@ -1,7 +1,6 @@
 {
 	"name": "@zoltu/rlp-encoder",
 	"description": "Dependency free library for doing RLP encoding.",
-	"version": "2.0.3",
 	"repository": {
 		"url": "https://github.com/Zoltu/rlp-encoder"
 	},
